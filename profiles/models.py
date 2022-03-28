@@ -10,3 +10,5 @@ class Profile(models.Model):
 
     def __str__(self):
         return f"profile of the user {self.user.username}"
+
+#depronto aqui se agregan los models de los datos
