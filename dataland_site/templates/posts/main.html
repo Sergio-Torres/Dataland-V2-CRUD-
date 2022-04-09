@@ -2,8 +2,12 @@
 {% load static %}
 
 {% block scripts %}
+
     <script src ="{% static 'posts/main.js' %}" defer></script>
-{%endblock scripts  %}
+    <!--jQuery for $.ajax-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+{% endblock scripts %}
 
 {% block title %}
 posts
@@ -14,6 +18,7 @@ posts
         {{obj.title}} - {{obj.description}} <br>
         
     {% endfor %}
+    <div id="hello-world"></div>
 {% endblock content %}
 
 
