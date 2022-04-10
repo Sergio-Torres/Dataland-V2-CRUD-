@@ -1,7 +1,7 @@
 console.log("hola nena");
 
 const helloWorldBox = document.getElementById('hello-world')
-
+const postsBox = document.getElementById('posts-box')
 
 
 $.ajax({
@@ -21,6 +21,13 @@ $.ajax({
     url: '/data/',
     success: function(response){
         console.log(response)
+        const data = response.data
+        console.log(data)
+        data.forEach(e =>{
+            postsBox.innerHTML += `
+            ${e.title} - <b>${e.description}</b><br>
+            `
+        });
     },
     error: function(error){
         console.log(error)
