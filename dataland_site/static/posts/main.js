@@ -15,3 +15,14 @@ $.ajax({
         console.log('error', error)
     }
 })
+
+$.ajax({
+    type: 'GET',
+    url: '/data/',
+    success: function(response){
+        console.log(response)
+    },
+    error: function(error){
+        console.log(error)
+    }
+})
