@@ -5,6 +5,29 @@ const spinnerBox = document.getElementById('spinner-box')
 const loadBtn = document.getElementById('load-btn')
 const endBox = document.getElementById('end-box')
 
+const getCookie =(name)=>{
+    let cookieValue = null;
+    if(document.cookie && document.cookie !== ''){
+        const cookies = document.cookie.split(';');
+        for(let i = 0; i < cookies.length; i++){
+            const cookie = cookies[i].trim();
+            // Does this cookie strgin begin with the name we want?
+            if(cookie.substring(0, name.length +1 )===(name + '=')){
+                cookieValue = decodeURIComponent(cookie.substring(name.length +1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+const csrftoken = getCookie('csrftoken');
+
+const likeUnlikePosts = ()=>{
+    const likeUnlikeForms = [...document.getElementsByClassName('like-unlike-forms')]
+    console.log(likeUnlikeForms)
+}
+
 let visible = 3
 
 const getData =()=>{
@@ -32,13 +55,20 @@ const getData =()=>{
                                         <a href="#" class="btn btn-primary">Details</a>
                                     </div>
                                     <div class="col-2">
-                                        <a href="#" class="btn btn-primary">${e.liked ? `Unlike (${e.count})`:`Like (${e.count})`}</a>
+                                        <form class="like-unlike-forms" data-form-id="${e.id}">
+                                            
+                                            <button href="#" class="btn btn-primary">
+                                                ${e.liked ? `Unlike (${e.count})`:`Like (${e.count})`}
+                                            </button>
+                                        </form>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     `
                 });
+                likeUnlikePosts()
             },100)
             console.log(response.size)
             if(response.size === 0){
