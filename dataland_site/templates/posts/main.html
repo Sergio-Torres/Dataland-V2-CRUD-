@@ -1,9 +1,8 @@
 {% extends "base.html" %}
 
 {% load static %}
-    <head>
-        
-    </head>
+{% load  crispy_forms_tags %}
+
 {% block scripts %}
 
     <script src ="{% static 'posts/main.js' %}" defer></script>
@@ -26,12 +25,11 @@ posts
     <div id="modal-posts">
         <div id="modal-body">
             <h2>Create post</h2>
-            <label for="name">Title</label>
-            <input type="text">            
-            <label for="name">Address</label>
-            <input type="text">
-
-            <button type="submit">Submit</button>
+            <form id="post-form">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button type="submit">Submit</button>
+            </form>
             <button id="btn-close">X</button>
         </div>
     </div>
