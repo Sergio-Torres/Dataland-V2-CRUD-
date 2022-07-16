@@ -2,6 +2,13 @@ from django.shortcuts import render
 from .models import Post
 from django.http import JsonResponse
 
+from django.templatetags.static import static
+"""
+#css static
+
+def get_css(request):
+    return JsonResponse({'css': static('posts/modal.css')})
+"""
 # Create your views here.
 
 def post_list_and_create(request):

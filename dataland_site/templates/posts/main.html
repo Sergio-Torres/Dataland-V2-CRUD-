@@ -1,9 +1,13 @@
 {% extends "base.html" %}
-{% load static %}
 
+{% load static %}
+    <head>
+        
+    </head>
 {% block scripts %}
 
     <script src ="{% static 'posts/main.js' %}" defer></script>
+    <script src ="{% static 'posts/modal.js' %}" defer></script>
     <!--jQuery for $.ajax-->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
@@ -14,10 +18,23 @@ posts
 {% endblock title %}
 
 {% block content %}
-<!--    {% for obj in qs %}
-        {{obj.title}} - {{obj.description}} <br>
-        
-        {% endfor %}-->
+    <!--modal-->
+    <button class="btn btn-primary modal-btn" id="modal-btn">
+        Add Post
+    </button>
+
+    <div id="modal-posts">
+        <div id="modal-body">
+            <h2>Create post</h2>
+            <label for="name">Title</label>
+            <input type="text">            
+            <label for="name">Address</label>
+            <input type="text">
+
+            <button type="submit">Submit</button>
+            <button id="btn-close">X</button>
+        </div>
+    </div>
 
     <div id="posts-box"></div>
     <div id="spinner-box" class="text-center">
