@@ -16,6 +16,12 @@ def post_list_and_create(request):
             instance = form.save(commit=False)
             instance.author = author
             instance.save()
+            return JsonResponse({
+                'title': instance.title,
+                'description' : instance.description,
+                'author': instance.author.user.username,
+                'id': instance.id,
+            })
     
     context = {
         'form' : form,
@@ -24,25 +30,27 @@ def post_list_and_create(request):
     return render(request, 'posts/main.html', context)
 
 def load_post_data_view(request, num_posts):
-    visible = 3
-    upper = num_posts #el numero de posts que hay
-    lower = upper - visible #resta la cantidad de post, por la cantidad que quieren que se vea
-    size = Post.objects.all().count()
+    if request.is_ajax():
 
-    qs = Post.objects.all()
-    data = []
-    for obj in qs:
-        #extrae la información de la base de datos
-        item = {
-            'id': obj.id,
-            'title': obj.title,
-            'description': obj.description,
-            'liked': True if request.user in obj.liked.all() else False,
-            'count' : obj.like_count,
-            'author': obj.author.user.username
-        }
-        data.append(item)
-    return JsonResponse({'data': data[lower:upper], 'size':size})
+        visible = 3
+        upper = num_posts #el numero de posts que hay
+        lower = upper - visible #resta la cantidad de post, por la cantidad que quieren que se vea
+        size = Post.objects.all().count()
+
+        qs = Post.objects.all()
+        data = []
+        for obj in qs:
+            #extrae la información de la base de datos
+            item = {
+                'id': obj.id,
+                'title': obj.title,
+                'description': obj.description,
+                'liked': True if request.user in obj.liked.all() else False,
+                'count' : obj.like_count,
+                'author': obj.author.user.username
+            }
+            data.append(item)
+        return JsonResponse({'data': data[lower:upper], 'size':size})
 
 def like_unlike_post(request):
     if request.is_ajax():

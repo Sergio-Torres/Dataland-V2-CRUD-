@@ -13,7 +13,10 @@
 
         <!--Js-->
         
-        {% block scripts %}{% endblock scripts %}
+        <script src ="{% static 'functions.js' %}" defer></script>
+        {% block scripts %}
+
+        {% endblock scripts %}
 
         <title>read posts | {%block title%}{% endblock title%} </title>
     </head>

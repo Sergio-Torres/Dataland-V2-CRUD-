@@ -5,9 +5,10 @@
  * */
 let modal = document.getElementById('modal-posts');
 let modalBody = document.getElementById('modal-body');
+
 const modalBtn = document.querySelector('.modal-btn');
 const btnClose = document.getElementById('btn-close');
-
+const btnSubmit = document.getElementById('btn-submit');
 
 let modalActive = 0;
 
@@ -56,6 +57,11 @@ modalBtn.addEventListener('click', ()=>{
 })
 
 btnClose.addEventListener('click', ()=>{
+    modal.style.visibility = 'hidden';
+    modal.style.opacity = '0';
+
+})
+btnSubmit.addEventListener('click', ()=>{
     modal.style.visibility = 'hidden';
     modal.style.opacity = '0';
 
