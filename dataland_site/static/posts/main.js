@@ -160,6 +160,8 @@ postForm.addEventListener('submit', e=>{
                 `)
             likeUnlikePosts()
             handleAlerts('success', 'New post added!')
+            //clean modal
+            postForm.reset()
         },
         error: function(error){
             console.log(error)
