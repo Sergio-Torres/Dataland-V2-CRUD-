@@ -1,8 +1,11 @@
 {% extends "base.html" %}
 {% load static %}
+{% load  crispy_forms_tags %}
 
 {% block scripts %}
     <script src="{% static 'posts/detail.js'%}" defer></script>
+    <script src="{% static 'posts/modalUpdate.js'%}" defer></script>
+    <script src="{% static 'posts/modalDelete.js'%}" defer></script>
     <!--jQuery for $.ajax-->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
@@ -17,6 +20,31 @@
     <button id="back-btn" class="btn btn-info">Back</button>
     <button id="update-btn" class="btn btn-primary not-visible">Update</button>
     <button id="delete-btn" class="btn btn-danger not-visible">Delete</button>
+    
+    <!---Update Posts-->
+    <div id="update-posts">
+        <div id="update-body">
+            <h2>Update post</h2>
+            <form id="update-post">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button  id="btnUpdate-submit" class="btn btn-success"  type="submit">Update</button>
+            </form>
+            <button id="btnUpdate-close">X</button>
+        </div>
+    </div>
+
+    <!--Delete posts -->
+    <div id="delete-posts">
+        <div id="delete-body">
+            Are you sure you want to delete <b>"{{obj.title}}"</b> ? :(
+            <form id="delete-post">
+                {% csrf_token %}
+                <button  id="btnDelete-submit" class="btn btn-danger" type="submit">Delete</button>
+            </form>
+            <button id="btnDelete-close">X</button>
+        </div>
+    </div>
 
     <div id="spinner-box" class="text-center">
         <div class="spinner-border" role="status"></div>
