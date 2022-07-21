@@ -43,14 +43,13 @@ def load_post_data_view(request, num_posts):
     if request.is_ajax():
 
         visible = 3
-        upper = num_posts #el numero de posts que hay
-        lower = upper - visible #resta la cantidad de post, por la cantidad que quieren que se vea
+        upper = num_posts 
+        lower = upper - visible #subtract the number of posts by the number you want see
         size = Post.objects.all().count()
 
         qs = Post.objects.all()
         data = []
         for obj in qs:
-            #extrae la información de la base de datos
             item = {
                 'id': obj.id,
                 'title': obj.title,
@@ -85,5 +84,22 @@ def like_unlike_post(request):
             obj.liked.add(request.user)
         return JsonResponse({'liked': liked, 'count': obj.like_count})
 
-def hello_world_view(request):
-    return JsonResponse({'text': 'hello world'})
+def update_post(request, pk):
+    obj = Post.objects.get(pk=pk)
+    if request.is_ajax():
+        new_title = request.POST.get('title')
+        new_description = request.POST.get('description')
+        obj.title = new_title
+        obj.description = new_description
+        obj.save()
+    
+        return JsonResponse({
+            'title': new_title,
+            'description' : new_description,
+            })
+
+def delete_post(request,pk):
+    obj = Post.objects.get(pk=pk)
+    if request.is_ajax():
+        obj.delete()
+        return JsonResponse({})

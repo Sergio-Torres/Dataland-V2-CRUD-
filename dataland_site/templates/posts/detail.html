@@ -21,11 +21,13 @@
     <button id="update-btn" class="btn btn-primary not-visible">Update</button>
     <button id="delete-btn" class="btn btn-danger not-visible">Delete</button>
     
+    <div id="alert-box" class="mt-3"></div>
+
     <!---Update Posts-->
     <div id="update-posts">
         <div id="update-body">
             <h2>Update post</h2>
-            <form id="update-post">
+            <form id="update-form">
                 {% csrf_token %}
                 {{form.as_p}}
                 <button  id="btnUpdate-submit" class="btn btn-success"  type="submit">Update</button>
@@ -38,7 +40,7 @@
     <div id="delete-posts">
         <div id="delete-body">
             Are you sure you want to delete <b>"{{obj.title}}"</b> ? :(
-            <form id="delete-post">
+            <form id="delete-form">
                 {% csrf_token %}
                 <button  id="btnDelete-submit" class="btn btn-danger" type="submit">Delete</button>
             </form>
